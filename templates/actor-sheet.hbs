@@ -174,22 +174,25 @@
         </div>
         <div class="exhaustion-block">
           <label>D'ÉPUISEMENT</label>
-          {{#times 6}}
-          <input type="checkbox" class="exhaustion-box" data-level="{{this}}"/>
-          {{/times}}
+          <input type="checkbox" class="exhaustion-box"/>
+          <input type="checkbox" class="exhaustion-box"/>
+          <input type="checkbox" class="exhaustion-box"/>
+          <input type="checkbox" class="exhaustion-box"/>
+          <input type="checkbox" class="exhaustion-box"/>
+          <input type="checkbox" class="exhaustion-box"/>
         </div>
         <div class="death-saves-block">
           <label>SUCCÈS</label>
           <div class="death-row">
-            {{#times 3}}
-            <input type="checkbox" name="system.attributes.death.success" class="death-success"/>
-            {{/times}}
+            <input type="checkbox" class="death-success"/>
+            <input type="checkbox" class="death-success"/>
+            <input type="checkbox" class="death-success"/>
           </div>
           <label>ÉCHECS</label>
           <div class="death-row">
-            {{#times 3}}
-            <input type="checkbox" name="system.attributes.death.failure" class="death-failure"/>
-            {{/times}}
+            <input type="checkbox" class="death-failure"/>
+            <input type="checkbox" class="death-failure"/>
+            <input type="checkbox" class="death-failure"/>
           </div>
           <label>SAUVEGARDES MORT</label>
         </div>
@@ -198,9 +201,16 @@
       {{!-- NIVEAUX --}}
       <div class="levels-block">
         <label>NIVEAUX</label>
-        {{#times 20}}
-        <input type="checkbox" class="level-box"/>
-        {{/times}}
+        <input type="checkbox" class="level-box"/><input type="checkbox" class="level-box"/>
+        <input type="checkbox" class="level-box"/><input type="checkbox" class="level-box"/>
+        <input type="checkbox" class="level-box"/><input type="checkbox" class="level-box"/>
+        <input type="checkbox" class="level-box"/><input type="checkbox" class="level-box"/>
+        <input type="checkbox" class="level-box"/><input type="checkbox" class="level-box"/>
+        <input type="checkbox" class="level-box"/><input type="checkbox" class="level-box"/>
+        <input type="checkbox" class="level-box"/><input type="checkbox" class="level-box"/>
+        <input type="checkbox" class="level-box"/><input type="checkbox" class="level-box"/>
+        <input type="checkbox" class="level-box"/><input type="checkbox" class="level-box"/>
+        <input type="checkbox" class="level-box"/><input type="checkbox" class="level-box"/>
       </div>
 
       {{!-- ACTIONS / ACTIONS BONUS / RÉACTIONS --}}
