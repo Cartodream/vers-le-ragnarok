@@ -14,15 +14,7 @@ class VtrActorSheet extends CharacterActorSheet {
     { inplace: false }
   );
 
-  static PARTS = foundry.utils.mergeObject(
-    CharacterActorSheet.PARTS,
-    {
-      vtrSidebar: {
-        template: "modules/vers-le-ragnarok/templates/vtr-sidebar.hbs"
-      }
-    },
-    { inplace: false }
-  );
+  static PARTS = CharacterActorSheet.PARTS;
 
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
