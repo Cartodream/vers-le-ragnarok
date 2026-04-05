@@ -16,16 +16,6 @@ class VtrActorSheet extends CharacterActorSheet {
 
   static PARTS = CharacterActorSheet.PARTS;
 
-  static TABS = [
-    { tab: "details",      label: "DND5E.Details",       icon: "fas fa-cog" },
-    { tab: "inventory",    label: "DND5E.Inventory",     svg: "systems/dnd5e/icons/svg/backpack.svg" },
-    { tab: "features",     label: "DND5E.Features",      icon: "fas fa-list" },
-    { tab: "spells",       label: "TYPES.Item.spellPl",  icon: "fas fa-book" },
-    { tab: "effects",      label: "DND5E.Effects",       icon: "fas fa-bolt" },
-    { tab: "biography",    label: "DND5E.Biography",     icon: "fas fa-feather" },
-    { tab: "specialTraits",label: "DND5E.SpecialTraits", icon: "fas fa-star" }
-  ];
-
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
