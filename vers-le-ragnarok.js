@@ -25,18 +25,20 @@ const ABILITY_LABELS = {
   int: "INT", wis: "SAG", cha: "CHA"
 };
 
-const _ParentSheet = dnd5e?.applications?.actor?.ActorSheet5eCharacter2
-  ?? dnd5e?.applications?.actor?.ActorSheet5eCharacter
+const _ParentSheet = dnd5e?.applications?.actor?.ActorSheet5eCharacter
   ?? ActorSheet;
 
 class VtrActorSheet extends _ParentSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "vtr-sheet"],
-      template: "modules/vers-le-ragnarok/templates/actor-sheet.hbs",
       width: 820,
       height: 980
     });
+  }
+
+  get template() {
+    return "modules/vers-le-ragnarok/templates/actor-sheet.hbs";
   }
 
   async getData() {
