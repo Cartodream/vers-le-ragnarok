@@ -115,7 +115,7 @@ class VtrActorSheet extends _BaseSheet {
 }
 
 Hooks.once("init", () => {
-  Actors.registerSheet("dnd5e", VtrActorSheet, {
+  foundry.documents.collections.Actors.registerSheet("dnd5e", VtrActorSheet, {
     types: ["character"],
     makeDefault: false,
     label: "Vers le Ragnarök"
