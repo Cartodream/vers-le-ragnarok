@@ -6,6 +6,7 @@ class VtrActorSheet extends CharacterActorSheet {
     CharacterActorSheet.DEFAULT_OPTIONS,
     {
       classes: ["dnd5e", "sheet", "actor", "character", "vertical-tabs", "vtr-sheet"],
+      position: { width: 800, height: 1000 },
       actions: {
         rollAsatru: VtrActorSheet.#rollAsatru,
         toggleAsatruProf: VtrActorSheet.#toggleAsatruProf
