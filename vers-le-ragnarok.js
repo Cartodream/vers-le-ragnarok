@@ -115,6 +115,13 @@ class VtrActorSheet extends _BaseSheet {
 }
 
 Hooks.once("init", () => {
+  // Enregistrement du helper Handlebars "times"
+  Handlebars.registerHelper("times", (n, block) => {
+    let result = "";
+    for (let i = 0; i < n; i++) result += block.fn(i);
+    return result;
+  });
+
   foundry.documents.collections.Actors.registerSheet("dnd5e", VtrActorSheet, {
     types: ["character"],
     makeDefault: false,
