@@ -25,12 +25,10 @@ const ABILITY_LABELS = {
   int: "INT", wis: "SAG", cha: "CHA"
 };
 
-const { HandlebarsApplicationMixin } = foundry.applications.api ?? {};
 const _BaseSheet = dnd5e?.applications?.actor?.BaseActorSheet
-  ?? dnd5e?.applications?.actor?.ActorSheet5e
   ?? ActorSheet;
 
-class VtrActorSheet extends HandlebarsApplicationMixin(_BaseSheet) {
+class VtrActorSheet extends _BaseSheet {
 
   static DEFAULT_OPTIONS = {
     classes: ["dnd5e", "sheet", "actor", "vtr-sheet"],
