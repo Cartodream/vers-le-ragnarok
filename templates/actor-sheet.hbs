@@ -1,0 +1,419 @@
+<form class="vtr-sheet {{cssClass}}" autocomplete="off">
+
+  {{!-- ONGLETS --}}
+  <nav class="vtr-tabs">
+    <button type="button" class="vtr-tab-btn active" data-page="1">⚔ Personnage</button>
+    <button type="button" class="vtr-tab-btn" data-page="2">📜 Histoire & Rune</button>
+  </nav>
+
+  {{!-- HEADER --}}
+  <header class="vtr-header">
+    <div class="vtr-title">
+      <h1>Vers le<br>Ragnarök</h1>
+    </div>
+    <div class="vtr-header-fields">
+      <div class="header-row">
+        <div class="field-group">
+          <input type="text" name="system.details.class" value="{{system.details.class}}" placeholder="Classe et niveau"/>
+          <label>CLASSE ET NIVEAU</label>
+        </div>
+        <div class="field-group">
+          <input type="text" name="system.details.background" value="{{system.details.background}}" placeholder="Historique"/>
+          <label>HISTORIQUE</label>
+        </div>
+        <div class="field-group">
+          <input type="text" name="flags.vers-le-ragnarok.playerName" value="{{flags.vers-le-ragnarok.playerName}}" placeholder="Nom du joueur"/>
+          <label>NOM DU JOUEUR</label>
+        </div>
+        <div class="field-group">
+          <input type="text" name="flags.vers-le-ragnarok.clan" value="{{flags.vers-le-ragnarok.clan}}" placeholder="Clan"/>
+          <label>CLAN</label>
+        </div>
+      </div>
+      <div class="header-row">
+        <div class="field-group wide">
+          <input type="text" name="name" value="{{actor.name}}" placeholder="Nom du personnage"/>
+          <label>NOM DU PERSONNAGE</label>
+        </div>
+        <div class="field-group">
+          <input type="text" name="system.details.race" value="{{system.details.race}}" placeholder="Race"/>
+          <label>RACE</label>
+        </div>
+        <div class="field-group">
+          <input type="text" name="system.details.alignment" value="{{system.details.alignment}}" placeholder="Alignement"/>
+          <label>ALIGNEMENT</label>
+        </div>
+        <div class="field-group">
+          <input type="number" name="system.details.xp.value" value="{{system.details.xp.value}}" placeholder="0"/>
+          <label>POINTS D'EXPÉRIENCE</label>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="vtr-page active" data-page="1">
+  <div class="vtr-body">
+
+    {{!-- COLONNE GAUCHE : stats + jets de sauvegarde + compétences --}}
+    <div class="vtr-col-left">
+
+      {{!-- STATS --}}
+      {{#each system.abilities as |ability key|}}
+      <div class="ability-block ability-{{key}}">
+        <label class="ability-label">{{lookup ../abilityLabels key}}</label>
+        <div class="ability-mod rollable" data-action="rollAbilityTest" data-ability="{{key}}">
+          {{numberFormat ability.mod decimals=0 sign=true}}
+        </div>
+        <input type="number" name="system.abilities.{{key}}.value" value="{{ability.value}}" class="ability-score"/>
+      </div>
+      {{/each}}
+
+      {{!-- INSPIRATION --}}
+      <div class="inspiration-block">
+        <label>INSPIRATION</label>
+        <input type="checkbox" name="system.attributes.inspiration" {{checked system.attributes.inspiration}}/>
+      </div>
+
+      {{!-- BONUS DE MAÎTRISE --}}
+      <div class="proficiency-block">
+        <span class="prof-value">{{numberFormat system.attributes.prof decimals=0 sign=true}}</span>
+        <label>BONUS DE MAÎTRISE</label>
+      </div>
+
+      {{!-- JETS DE SAUVEGARDE --}}
+      <div class="saves-block">
+        {{#each system.abilities as |ability key|}}
+        <div class="save-row">
+          <input type="checkbox" class="proficiency-toggle" {{checked ability.save.proficient}} disabled/>
+          <span class="save-value rollable" data-action="rollAbilitySave" data-ability="{{key}}">
+            {{numberFormat ability.save.value decimals=0 sign=true}}
+          </span>
+          <span class="save-label">{{lookup ../abilityLabels key}}</span>
+        </div>
+        {{/each}}
+        <label class="section-label">JETS DE SAUVEGARDE</label>
+      </div>
+
+      {{!-- RÉSISTANCES --}}
+      <div class="resistances-block">
+        <label>RÉSISTANCES</label>
+        <textarea name="flags.vers-le-ragnarok.resistances">{{flags.vers-le-ragnarok.resistances}}</textarea>
+      </div>
+
+      {{!-- COMPÉTENCES --}}
+      <div class="skills-block">
+        {{#each vtrSkills as |skill key|}}
+        <div class="skill-row {{#if (eq key 'asa')}}skill-asatru{{/if}}">
+          <span class="proficiency-toggle prof-{{skill.proficient}}" data-skill="{{key}}"></span>
+          <span class="skill-value rollable" data-action="rollSkill" data-skill="{{key}}">
+            {{numberFormat skill.value decimals=0 sign=true}}
+          </span>
+          <span class="skill-name">{{skill.label}} <em>({{skill.ability}})</em></span>
+        </div>
+        {{/each}}
+        <label class="section-label">COMPÉTENCES</label>
+      </div>
+
+    </div>
+
+    {{!-- COLONNE CENTRALE --}}
+    <div class="vtr-col-center">
+
+      {{!-- INITIATIVE / CA / VITESSE --}}
+      <div class="combat-stats">
+        <div class="combat-stat">
+          <div class="stat-value rollable" data-action="rollInitiative">
+            {{numberFormat system.attributes.init.total decimals=0 sign=true}}
+          </div>
+          <label>INITIATIVE</label>
+        </div>
+        <div class="combat-stat ca-circle">
+          <div class="stat-value">{{system.attributes.ac.value}}</div>
+          <label>CLASSE D'ARMURE</label>
+        </div>
+        <div class="combat-stat">
+          <div class="stat-value">{{system.attributes.movement.walk}}M</div>
+          <label>VITESSE</label>
+        </div>
+      </div>
+
+      {{!-- SAGESSE PASSIVE --}}
+      <div class="passive-block">
+        <div class="passive-row">
+          <span class="passive-value">{{system.skills.prc.passive}}</span>
+          <label>SAGESSE PASSIVE (PERCEPTION)</label>
+        </div>
+        <div class="passive-row">
+          <span class="passive-value">{{passiveAsatru}}</span>
+          <label>SAGESSE PASSIVE (ÁSATRÚ)</label>
+        </div>
+      </div>
+
+      {{!-- POINTS DE VIE --}}
+      <div class="hp-block">
+        <div class="hp-max">
+          <label>PV MAX</label>
+          <input type="number" name="system.attributes.hp.max" value="{{system.attributes.hp.max}}"/>
+        </div>
+        <div class="hp-current">
+          <label>POINTS DE VIE ACTUELS</label>
+          <input type="number" name="system.attributes.hp.value" value="{{system.attributes.hp.value}}"/>
+        </div>
+        <div class="hp-temp">
+          <label>POINTS DE VIE TEMPORAIRES</label>
+          <input type="number" name="system.attributes.hp.temp" value="{{system.attributes.hp.temp}}"/>
+        </div>
+      </div>
+
+      {{!-- DÉS DE VIE + ÉPUISEMENT --}}
+      <div class="dice-exhaustion-row">
+        <div class="hit-dice-block">
+          <div class="hd-value">{{system.attributes.hd}}</div>
+          <label>DÉS DE VIE</label>
+          <div class="hd-total">{{system.details.hitDice}}</div>
+        </div>
+        <div class="exhaustion-block">
+          <label>D'ÉPUISEMENT</label>
+          {{#times 6}}
+          <input type="checkbox" class="exhaustion-box" data-level="{{this}}"/>
+          {{/times}}
+        </div>
+        <div class="death-saves-block">
+          <label>SUCCÈS</label>
+          <div class="death-row">
+            {{#times 3}}
+            <input type="checkbox" name="system.attributes.death.success" class="death-success"/>
+            {{/times}}
+          </div>
+          <label>ÉCHECS</label>
+          <div class="death-row">
+            {{#times 3}}
+            <input type="checkbox" name="system.attributes.death.failure" class="death-failure"/>
+            {{/times}}
+          </div>
+          <label>SAUVEGARDES MORT</label>
+        </div>
+      </div>
+
+      {{!-- NIVEAUX --}}
+      <div class="levels-block">
+        <label>NIVEAUX</label>
+        {{#times 20}}
+        <input type="checkbox" class="level-box"/>
+        {{/times}}
+      </div>
+
+      {{!-- ACTIONS / ACTIONS BONUS / RÉACTIONS --}}
+      <div class="actions-block">
+        <div class="action-col">
+          <label>ACTIONS</label>
+          <textarea name="flags.vers-le-ragnarok.actions">{{flags.vers-le-ragnarok.actions}}</textarea>
+        </div>
+        <div class="action-col">
+          <label>ACTIONS BONUS</label>
+          <textarea name="flags.vers-le-ragnarok.bonusActions">{{flags.vers-le-ragnarok.bonusActions}}</textarea>
+        </div>
+        <div class="action-col">
+          <label>RÉACTIONS</label>
+          <textarea name="flags.vers-le-ragnarok.reactions">{{flags.vers-le-ragnarok.reactions}}</textarea>
+        </div>
+      </div>
+
+      {{!-- ATTAQUES --}}
+      <div class="attacks-block">
+        <div class="attacks-header">
+          <span>NOM ET DESCRIPTION</span>
+          <span>MAÎTR.</span>
+          <span>COMP.</span>
+          <span>PORTÉE</span>
+          <span>BONUS D'ATT</span>
+          <span>DÉGÂTS/TYPE</span>
+        </div>
+        {{#each items as |item|}}
+        {{#if (eq item.type "weapon")}}
+        <div class="attack-row">
+          <span class="attack-name">{{item.name}}</span>
+          <input type="checkbox" class="attack-prof" {{checked item.system.proficient}}/>
+          <span class="attack-ability">{{item.system.ability}}</span>
+          <span class="attack-range">{{item.system.range.value}}{{item.system.range.units}}</span>
+          <span class="attack-bonus rollable" data-item-id="{{item.id}}" data-action="rollAttack">
+            {{numberFormat item.system.attackBonus decimals=0 sign=true}}
+          </span>
+          <span class="attack-damage">{{item.system.damage.parts.[0].[0]}}</span>
+        </div>
+        {{/if}}
+        {{/each}}
+        <label class="section-label">ATTAQUES : ARMES & TOURS DE MAGIE</label>
+      </div>
+
+      {{!-- ÉQUIPEMENT --}}
+      <div class="equipment-block">
+        <textarea name="flags.vers-le-ragnarok.equipment">{{flags.vers-le-ragnarok.equipment}}</textarea>
+        <div class="currency-row">
+          <div class="currency"><input type="number" name="system.currency.pp" value="{{system.currency.pp}}"/><label>PO</label></div>
+          <div class="currency"><input type="number" name="system.currency.gp" value="{{system.currency.gp}}"/><label>PA</label></div>
+          <div class="currency"><input type="number" name="system.currency.cp" value="{{system.currency.cp}}"/><label>PC</label></div>
+        </div>
+        <label class="section-label">ÉQUIPEMENT</label>
+      </div>
+
+    </div>
+
+    {{!-- COLONNE DROITE --}}
+    <div class="vtr-col-right">
+
+      {{!-- ARMURE --}}
+      <div class="armor-block">
+        <label>ARMURE</label>
+        <div class="armor-row">
+          <span>DESCRIPTION</span><span>CA</span>
+        </div>
+        <div class="armor-row">
+          <input type="text" name="flags.vers-le-ragnarok.armorDesc" value="{{flags.vers-le-ragnarok.armorDesc}}"/>
+          <input type="number" name="system.attributes.ac.value" value="{{system.attributes.ac.value}}"/>
+        </div>
+        <div class="armor-type-row">
+          <label><input type="radio" name="flags.vers-le-ragnarok.armorType" value="legere" {{checked (eq flags.vers-le-ragnarok.armorType 'legere')}}/> Légère</label>
+          <label><input type="radio" name="flags.vers-le-ragnarok.armorType" value="intermediaire" {{checked (eq flags.vers-le-ragnarok.armorType 'intermediaire')}}/> Intermédiaire</label>
+          <label><input type="radio" name="flags.vers-le-ragnarok.armorType" value="lourde" {{checked (eq flags.vers-le-ragnarok.armorType 'lourde')}}/> Lourde</label>
+        </div>
+        <div class="armor-row">
+          <label>BOUCLIER</label>
+          <input type="text" name="flags.vers-le-ragnarok.shield" value="{{flags.vers-le-ragnarok.shield}}"/>
+        </div>
+        <div class="armor-row">
+          <label>MAGIE</label>
+          <input type="text" name="flags.vers-le-ragnarok.magicArmor" value="{{flags.vers-le-ragnarok.magicArmor}}"/>
+        </div>
+        <div class="armor-row">
+          <label>DIVERS</label>
+          <input type="text" name="flags.vers-le-ragnarok.miscArmor" value="{{flags.vers-le-ragnarok.miscArmor}}"/>
+        </div>
+      </div>
+
+      {{!-- LANGUES ET OUTILS --}}
+      <div class="languages-block">
+        <label>LANGUES</label>
+        <textarea name="flags.vers-le-ragnarok.languages">{{flags.vers-le-ragnarok.languages}}</textarea>
+        <label>OUTILS ET AUTRES</label>
+        <textarea name="flags.vers-le-ragnarok.tools">{{flags.vers-le-ragnarok.tools}}</textarea>
+      </div>
+
+      {{!-- MAÎTRISES ARMURES/ARMES --}}
+      <div class="proficiencies-block">
+        <label>ARMURES</label>
+        <div class="armor-prof-row">
+          <label><input type="checkbox" name="flags.vers-le-ragnarok.profLegere" {{checked flags.vers-le-ragnarok.profLegere}}/> Légères</label>
+          <label><input type="checkbox" name="flags.vers-le-ragnarok.profInter" {{checked flags.vers-le-ragnarok.profInter}}/> Intermédiaires</label>
+          <label><input type="checkbox" name="flags.vers-le-ragnarok.profLourde" {{checked flags.vers-le-ragnarok.profLourde}}/> Lourdes</label>
+          <label><input type="checkbox" name="flags.vers-le-ragnarok.profBouclier" {{checked flags.vers-le-ragnarok.profBouclier}}/> Boucliers</label>
+        </div>
+        <label>ARMES</label>
+        <div class="weapon-prof-row">
+          <label><input type="checkbox" name="flags.vers-le-ragnarok.profCourantes" {{checked flags.vers-le-ragnarok.profCourantes}}/> Courantes</label>
+          <label><input type="checkbox" name="flags.vers-le-ragnarok.profGuerre" {{checked flags.vers-le-ragnarok.profGuerre}}/> de guerre</label>
+          <label><input type="checkbox" name="flags.vers-le-ragnarok.profAutres" {{checked flags.vers-le-ragnarok.profAutres}}/> Autres</label>
+        </div>
+        <label>AUTRES MAÎTRISES ET LANGUES</label>
+        <textarea name="flags.vers-le-ragnarok.otherProf">{{flags.vers-le-ragnarok.otherProf}}</textarea>
+      </div>
+
+    </div>
+
+  </div>
+  </div>{{!-- fin page 1 --}}
+
+  {{!-- PAGE 2 --}}
+  <div class="vtr-page" data-page="2">
+  <div class="vtr-body p2">
+
+    {{!-- COLONNE GAUCHE : portrait + rune/ætt + historique --}}
+    <div class="vtr-col-left p2">
+
+      <div class="portrait-block">
+        <img class="actor-portrait" src="{{actor.img}}" alt="Portrait"/>
+        <label>PORTRAIT DU PERSONNAGE</label>
+      </div>
+
+      <div class="rune-aett-block">
+        <div class="rune-display">
+          <div class="rune-symbol">{{flags.vers-le-ragnarok.runeSymbol}}</div>
+          <label>RUNE</label>
+        </div>
+        <div class="aett-display">
+          <input type="text" name="flags.vers-le-ragnarok.aett" value="{{flags.vers-le-ragnarok.aett}}" placeholder="Ætt"/>
+          <label>ÆTT</label>
+        </div>
+      </div>
+
+      <div class="background-block">
+        <label>HISTORIQUE</label>
+        <textarea name="flags.vers-le-ragnarok.background">{{flags.vers-le-ragnarok.background}}</textarea>
+      </div>
+
+    </div>
+
+    {{!-- COLONNE CENTRALE : clan + aptitudes --}}
+    <div class="vtr-col-center p2">
+
+      <div class="clan-block">
+        <div class="clan-header">
+          <input type="text" name="flags.vers-le-ragnarok.clanTitle" value="{{flags.vers-le-ragnarok.clanTitle}}" placeholder="Nom du clan"/>
+        </div>
+        <div class="clan-body">
+          <div class="clan-desc">
+            <textarea name="flags.vers-le-ragnarok.clanDesc">{{flags.vers-le-ragnarok.clanDesc}}</textarea>
+          </div>
+          <div class="clan-img-block">
+            <img class="clan-img" src="{{flags.vers-le-ragnarok.clanImg}}" alt="Clan"/>
+            <label>CLAN</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="abilities-block">
+        <label>APTITUDES DE CLASSE ET NOTES</label>
+        <textarea name="flags.vers-le-ragnarok.classAbilities">{{flags.vers-le-ragnarok.classAbilities}}</textarea>
+      </div>
+
+      <div class="allies-block">
+        <label>ALLIÉS</label>
+        <textarea name="flags.vers-le-ragnarok.allies">{{flags.vers-le-ragnarok.allies}}</textarea>
+      </div>
+
+    </div>
+
+    {{!-- COLONNE DROITE : traits, idéaux, liens, défauts, dons --}}
+    <div class="vtr-col-right p2">
+
+      <div class="trait-block">
+        <label>TRAITS DE PERSONNALITÉ</label>
+        <textarea name="flags.vers-le-ragnarok.traits">{{flags.vers-le-ragnarok.traits}}</textarea>
+      </div>
+
+      <div class="trait-block">
+        <label>IDÉAUX</label>
+        <textarea name="flags.vers-le-ragnarok.ideals">{{flags.vers-le-ragnarok.ideals}}</textarea>
+      </div>
+
+      <div class="trait-block">
+        <label>LIENS</label>
+        <textarea name="flags.vers-le-ragnarok.bonds">{{flags.vers-le-ragnarok.bonds}}</textarea>
+      </div>
+
+      <div class="trait-block">
+        <label>DÉFAUTS</label>
+        <textarea name="flags.vers-le-ragnarok.flaws">{{flags.vers-le-ragnarok.flaws}}</textarea>
+      </div>
+
+      <div class="trait-block">
+        <label>DONS</label>
+        <textarea name="flags.vers-le-ragnarok.feats">{{flags.vers-le-ragnarok.feats}}</textarea>
+      </div>
+
+    </div>
+
+  </div>
+  </div>{{!-- fin page 2 --}}
+
+</form>

@@ -1,0 +1,755 @@
+/* ===== VERS LE RAGNARÖK — FICHE PERSONNAGE ===== */
+
+.vtr-sheet {
+  font-family: "Palatino Linotype", Palatino, serif;
+  background: #f5ead6;
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* HEADER */
+.vtr-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 12px 6px;
+  border-bottom: 3px double #5a3e1b;
+  background: #ede0c4;
+}
+
+.vtr-title h1 {
+  font-family: "MedievalSharp", "Palatino Linotype", serif;
+  font-size: 1.6em;
+  line-height: 1.1;
+  color: #2c1a0e;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  min-width: 120px;
+  text-align: center;
+}
+
+.vtr-header-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.header-row {
+  display: flex;
+  gap: 8px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.field-group.wide { flex: 2; }
+
+.field-group input {
+  border: none;
+  border-bottom: 1px solid #5a3e1b;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.85em;
+  padding: 2px 4px;
+  color: #1a1a1a;
+}
+
+.field-group label {
+  font-size: 0.55em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #5a3e1b;
+  text-align: center;
+}
+
+/* BODY */
+.vtr-body {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  flex: 1;
+}
+
+/* COLONNES */
+.vtr-col-left  { width: 200px; flex-shrink: 0; display: flex; flex-direction: column; gap: 6px; }
+.vtr-col-center { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.vtr-col-right { width: 180px; flex-shrink: 0; display: flex; flex-direction: column; gap: 6px; }
+
+/* BLOCS GÉNÉRIQUES */
+.vtr-sheet .section-label {
+  display: block;
+  text-align: center;
+  font-size: 0.6em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #5a3e1b;
+  border-top: 1px solid #5a3e1b;
+  margin-top: 4px;
+  padding-top: 2px;
+}
+
+/* STATS */
+.ability-block {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #5a3e1b;
+  padding: 3px 6px;
+  background: #ede0c4;
+}
+
+.ability-label {
+  font-size: 0.65em;
+  text-transform: uppercase;
+  color: #5a3e1b;
+  width: 28px;
+  font-weight: bold;
+}
+
+.ability-mod {
+  font-size: 1.3em;
+  font-weight: bold;
+  width: 36px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.ability-score {
+  width: 32px;
+  text-align: center;
+  border: 1px solid #5a3e1b;
+  background: #f5ead6;
+  font-size: 0.85em;
+}
+
+/* INSPIRATION / MAÎTRISE */
+.inspiration-block, .proficiency-block {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75em;
+}
+
+.prof-value {
+  font-size: 1.1em;
+  font-weight: bold;
+  border: 1px solid #5a3e1b;
+  padding: 2px 6px;
+  background: #ede0c4;
+}
+
+/* JETS DE SAUVEGARDE */
+.saves-block {
+  border: 1px solid #5a3e1b;
+  padding: 4px 6px;
+  background: #ede0c4;
+}
+
+.save-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8em;
+  margin-bottom: 2px;
+}
+
+.save-value { width: 28px; text-align: right; cursor: pointer; font-weight: bold; }
+.save-label { font-size: 0.85em; }
+
+/* RÉSISTANCES */
+.resistances-block {
+  border: 1px solid #5a3e1b;
+  padding: 4px 6px;
+  background: #ede0c4;
+}
+
+.resistances-block textarea {
+  width: 100%;
+  height: 50px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.75em;
+  resize: none;
+}
+
+/* COMPÉTENCES */
+.skills-block {
+  border: 1px solid #5a3e1b;
+  padding: 4px 6px;
+  background: #ede0c4;
+  flex: 1;
+}
+
+.skill-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75em;
+  margin-bottom: 1px;
+}
+
+.skill-asatru .skill-name { color: #7a2e0e; font-weight: bold; }
+
+.proficiency-toggle {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #5a3e1b;
+  display: inline-block;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.proficiency-toggle.prof-1 { background: #5a3e1b88; }
+.proficiency-toggle.prof-2 { background: #5a3e1b; }
+
+.skill-value {
+  width: 26px;
+  text-align: right;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.skill-name em { font-size: 0.85em; color: #5a3e1b; }
+
+/* COMBAT STATS */
+.combat-stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+}
+
+.combat-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #5a3e1b;
+  padding: 4px 10px;
+  background: #ede0c4;
+  min-width: 60px;
+}
+
+.combat-stat .stat-value {
+  font-size: 1.4em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.combat-stat label {
+  font-size: 0.55em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #5a3e1b;
+}
+
+.ca-circle {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  justify-content: center;
+}
+
+/* SAGESSE PASSIVE */
+.passive-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border: 1px solid #5a3e1b;
+  padding: 4px 8px;
+  background: #ede0c4;
+}
+
+.passive-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75em;
+}
+
+.passive-value {
+  font-size: 1.1em;
+  font-weight: bold;
+  border: 1px solid #5a3e1b;
+  padding: 1px 6px;
+  background: #f5ead6;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* POINTS DE VIE */
+.hp-block {
+  display: flex;
+  gap: 6px;
+  border: 1px solid #5a3e1b;
+  padding: 4px 8px;
+  background: #ede0c4;
+}
+
+.hp-block > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.hp-block label { font-size: 0.6em; text-transform: uppercase; color: #5a3e1b; }
+.hp-block input { width: 100%; text-align: center; border: 1px solid #5a3e1b; background: #f5ead6; font-size: 1em; }
+
+/* DÉS DE VIE + ÉPUISEMENT */
+.dice-exhaustion-row {
+  display: flex;
+  gap: 6px;
+}
+
+.hit-dice-block, .exhaustion-block, .death-saves-block {
+  border: 1px solid #5a3e1b;
+  padding: 4px 6px;
+  background: #ede0c4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.75em;
+}
+
+.hd-value { font-size: 1.4em; font-weight: bold; }
+
+.exhaustion-box, .level-box {
+  width: 12px;
+  height: 12px;
+  margin: 1px;
+}
+
+.death-row { display: flex; gap: 3px; }
+.death-saves-block label { font-size: 0.65em; text-transform: uppercase; color: #5a3e1b; }
+
+/* NIVEAUX */
+.levels-block {
+  border: 1px solid #5a3e1b;
+  padding: 4px 6px;
+  background: #ede0c4;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.7em;
+}
+
+/* ACTIONS */
+.actions-block {
+  display: flex;
+  gap: 4px;
+  border: 1px solid #5a3e1b;
+  padding: 4px 6px;
+  background: #ede0c4;
+}
+
+.action-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.action-col label {
+  font-size: 0.6em;
+  text-transform: uppercase;
+  color: #5a3e1b;
+  text-align: center;
+}
+
+.action-col textarea {
+  flex: 1;
+  min-height: 50px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.75em;
+  resize: none;
+}
+
+/* ATTAQUES */
+.attacks-block {
+  border: 1px solid #5a3e1b;
+  padding: 4px 6px;
+  background: #ede0c4;
+  font-size: 0.75em;
+}
+
+.attacks-header {
+  display: grid;
+  grid-template-columns: 2fr 0.5fr 0.5fr 1fr 0.8fr 1fr;
+  gap: 4px;
+  font-size: 0.65em;
+  text-transform: uppercase;
+  color: #5a3e1b;
+  border-bottom: 1px solid #5a3e1b;
+  padding-bottom: 2px;
+  margin-bottom: 3px;
+}
+
+.attack-row {
+  display: grid;
+  grid-template-columns: 2fr 0.5fr 0.5fr 1fr 0.8fr 1fr;
+  gap: 4px;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.attack-bonus { cursor: pointer; font-weight: bold; }
+
+/* ÉQUIPEMENT */
+.equipment-block {
+  border: 1px solid #5a3e1b;
+  padding: 4px 6px;
+  background: #ede0c4;
+  flex: 1;
+}
+
+.equipment-block textarea {
+  width: 100%;
+  height: 100px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.75em;
+  resize: none;
+}
+
+.currency-row {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.currency {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.75em;
+}
+
+.currency input { width: 40px; text-align: center; border: 1px solid #5a3e1b; background: #f5ead6; }
+.currency label { color: #5a3e1b; font-weight: bold; }
+
+/* COLONNE DROITE */
+.armor-block, .languages-block, .proficiencies-block {
+  border: 1px solid #5a3e1b;
+  padding: 4px 6px;
+  background: #ede0c4;
+  font-size: 0.75em;
+}
+
+.armor-block label, .languages-block label, .proficiencies-block label {
+  font-size: 0.65em;
+  text-transform: uppercase;
+  color: #5a3e1b;
+  display: block;
+}
+
+.armor-row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin-bottom: 3px;
+}
+
+.armor-row input[type="text"] { flex: 1; border: none; border-bottom: 1px solid #5a3e1b; background: transparent; }
+.armor-row input[type="number"] { width: 36px; text-align: center; border: 1px solid #5a3e1b; background: #f5ead6; }
+
+.armor-type-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 4px; }
+.armor-prof-row, .weapon-prof-row { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
+
+.languages-block textarea, .proficiencies-block textarea {
+  width: 100%;
+  height: 50px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.9em;
+  resize: none;
+}
+
+/* ROLLABLE */
+.rollable:hover { color: #7a2e0e; text-shadow: 0 0 4px #c8860088; cursor: pointer; }
+
+/* ===== ONGLETS ===== */
+.vtr-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 6px 12px 0;
+  background: #ede0c4;
+  border-bottom: 2px solid #5a3e1b;
+}
+
+.vtr-tab-btn {
+  font-family: "Palatino Linotype", serif;
+  font-size: 0.85em;
+  padding: 4px 14px;
+  border: 1px solid #5a3e1b;
+  border-bottom: none;
+  background: #d4c4a0;
+  color: #2c1a0e;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+}
+
+.vtr-tab-btn.active {
+  background: #f5ead6;
+  font-weight: bold;
+  border-bottom: 2px solid #f5ead6;
+  margin-bottom: -2px;
+}
+
+/* ===== PAGES ===== */
+.vtr-page { display: none; }
+.vtr-page.active { display: block; }
+
+/* ===== PAGE 2 ===== */
+.vtr-body.p2 { align-items: flex-start; }
+
+.vtr-col-left.p2 {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vtr-col-center.p2 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vtr-col-right.p2 {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* PORTRAIT */
+.portrait-block {
+  border: 2px solid #5a3e1b;
+  background: #ede0c4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+}
+
+.actor-portrait {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border: 1px solid #5a3e1b;
+}
+
+.portrait-block label {
+  font-size: 0.6em;
+  text-transform: uppercase;
+  color: #5a3e1b;
+  margin-top: 4px;
+  letter-spacing: 1px;
+}
+
+/* RUNE + ÆETT */
+.rune-aett-block {
+  display: flex;
+  gap: 8px;
+  border: 1px solid #5a3e1b;
+  padding: 6px;
+  background: #ede0c4;
+}
+
+.rune-display, .aett-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.rune-symbol {
+  font-size: 2.5em;
+  line-height: 1;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #5a3e1b;
+  width: 48px;
+  background: #f5ead6;
+}
+
+.rune-display label, .aett-display label {
+  font-size: 0.6em;
+  text-transform: uppercase;
+  color: #5a3e1b;
+  margin-top: 4px;
+}
+
+.aett-display input {
+  font-size: 1em;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid #5a3e1b;
+  background: transparent;
+  font-family: inherit;
+  width: 100%;
+}
+
+/* HISTORIQUE */
+.background-block {
+  border: 1px solid #5a3e1b;
+  padding: 6px;
+  background: #ede0c4;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.background-block label {
+  font-size: 0.6em;
+  text-transform: uppercase;
+  color: #5a3e1b;
+  margin-bottom: 4px;
+}
+
+.background-block textarea {
+  flex: 1;
+  min-height: 120px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.8em;
+  resize: none;
+}
+
+/* CLAN */
+.clan-block {
+  border: 1px solid #5a3e1b;
+  padding: 6px;
+  background: #ede0c4;
+}
+
+.clan-header input {
+  width: 100%;
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+  border-bottom: 1px solid #5a3e1b;
+  background: transparent;
+  font-family: inherit;
+  margin-bottom: 6px;
+}
+
+.clan-body {
+  display: flex;
+  gap: 8px;
+}
+
+.clan-desc {
+  flex: 1;
+}
+
+.clan-desc textarea {
+  width: 100%;
+  height: 120px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.78em;
+  resize: none;
+}
+
+.clan-img-block {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.clan-img {
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+  border: 1px solid #5a3e1b;
+  background: #f5ead6;
+}
+
+.clan-img-block label {
+  font-size: 0.6em;
+  text-transform: uppercase;
+  color: #5a3e1b;
+}
+
+/* APTITUDES + ALLIÉS */
+.abilities-block, .allies-block {
+  border: 1px solid #5a3e1b;
+  padding: 6px;
+  background: #ede0c4;
+  display: flex;
+  flex-direction: column;
+}
+
+.abilities-block { flex: 1; }
+
+.abilities-block label, .allies-block label {
+  font-size: 0.6em;
+  text-transform: uppercase;
+  color: #5a3e1b;
+  margin-bottom: 4px;
+}
+
+.abilities-block textarea {
+  flex: 1;
+  min-height: 200px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.78em;
+  resize: none;
+}
+
+.allies-block textarea {
+  min-height: 80px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.78em;
+  resize: none;
+}
+
+/* TRAITS / IDÉAUX / LIENS / DÉFAUTS / DONS */
+.trait-block {
+  border: 1px solid #5a3e1b;
+  padding: 5px 6px;
+  background: #ede0c4;
+  display: flex;
+  flex-direction: column;
+}
+
+.trait-block label {
+  font-size: 0.6em;
+  text-transform: uppercase;
+  color: #5a3e1b;
+  margin-bottom: 3px;
+}
+
+.trait-block textarea {
+  min-height: 55px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.78em;
+  resize: none;
+}

@@ -1,0 +1,25 @@
+{
+  "id": "vers-le-ragnarok",
+  "title": "Vers le Ragnarök",
+  "description": "Fiche de personnage personnalisée pour Vers le Ragnarök, compatible avec le système DnD5e.",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "12"
+  },
+  "systems": ["dnd5e"],
+  "authors": [{ "name": "Ponch" }],
+  "esmodules": ["vers-le-ragnarok.js"],
+  "styles": ["styles/vtr.css"],
+  "languages": [
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "lang/fr.json"
+    }
+  ],
+  "flags": {},
+  "url": "https://github.com/Cartodream/vers-le-ragnarok",
+  "manifest": "https://raw.githubusercontent.com/Cartodream/vers-le-ragnarok/main/module.json",
+  "download": "https://github.com/Cartodream/vers-le-ragnarok/archive/refs/heads/main.zip"
+}
