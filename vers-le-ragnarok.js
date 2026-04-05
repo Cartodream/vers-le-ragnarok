@@ -25,43 +25,38 @@ const ABILITY_LABELS = {
   int: "INT", wis: "SAG", cha: "CHA"
 };
 
-const _ParentSheet = dnd5e?.applications?.actor?.ActorSheet5eCharacter
+const { HandlebarsApplicationMixin } = foundry.applications.api ?? {};
+const _BaseSheet = dnd5e?.applications?.actor?.BaseActorSheet
+  ?? dnd5e?.applications?.actor?.ActorSheet5e
   ?? ActorSheet;
 
-class VtrActorSheet extends _ParentSheet {
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "sheet", "actor", "vtr-sheet"],
-      width: 820,
-      height: 980
-    });
-  }
+class VtrActorSheet extends HandlebarsApplicationMixin(_BaseSheet) {
 
-  get template() {
-    return "modules/vers-le-ragnarok/templates/actor-sheet.hbs";
-  }
+  static DEFAULT_OPTIONS = {
+    classes: ["dnd5e", "sheet", "actor", "vtr-sheet"],
+    position: { width: 820, height: 980 },
+    window: { resizable: true },
+    form: { submitOnChange: true }
+  };
 
-  async getData() {
-    const data = await super.getData();
+  static PARTS = {
+    main: { template: "modules/vers-le-ragnarok/templates/actor-sheet.hbs" }
+  };
 
-    // Calcul des compétences VtR (inclut Ásatrú custom)
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
     const actor = this.actor;
     const prof = actor.system.attributes.prof ?? 2;
     const skills = {};
 
     for (const [key, skill] of Object.entries(VTR_SKILLS)) {
       const abilityMod = actor.system.abilities[skill.ability]?.mod ?? 0;
-
       if (key === "asa") {
-        // Compétence custom Ásatrú — stockée dans flags
-        const flags = actor.flags?.["vers-le-ragnarok"] ?? {};
-        const proficient = flags.asatruProf ?? 0; // 0, 0.5, 1, 2
+        const proficient = actor.getFlag("vers-le-ragnarok", "asatruProf") ?? 0;
         const bonus = Math.floor(prof * proficient);
         skills[key] = {
-          label: skill.label,
-          ability: ABILITY_LABELS[skill.ability],
-          value: abilityMod + bonus,
-          proficient,
+          label: skill.label, ability: ABILITY_LABELS[skill.ability],
+          value: abilityMod + bonus, proficient,
           passive: 10 + abilityMod + bonus
         };
       } else {
@@ -69,26 +64,26 @@ class VtrActorSheet extends _ParentSheet {
         const proficient = s.value ?? 0;
         const bonus = Math.floor(prof * proficient);
         skills[key] = {
-          label: skill.label,
-          ability: ABILITY_LABELS[skill.ability],
-          value: abilityMod + bonus,
-          proficient,
+          label: skill.label, ability: ABILITY_LABELS[skill.ability],
+          value: abilityMod + bonus, proficient,
           passive: 10 + abilityMod + bonus
         };
       }
     }
 
-    data.vtrSkills = skills;
-    data.abilityLabels = ABILITY_LABELS;
-
-    // Sagesse passive Ásatrú
-    data.passiveAsatru = skills.asa?.passive ?? 10;
-
-    return data;
+    context.vtrSkills = skills;
+    context.abilityLabels = ABILITY_LABELS;
+    context.passiveAsatru = skills.asa?.passive ?? 10;
+    context.actor = actor;
+    context.system = actor.system;
+    context.flags = actor.flags;
+    context.items = actor.items.contents;
+    return context;
   }
 
-  activateListeners(html) {
-    super.activateListeners(html);
+  _onRender(context, options) {
+    super._onRender(context, options);
+    const html = $(this.element);
 
     // Navigation pages
     html.find(".vtr-tab-btn").on("click", (ev) => {
@@ -100,26 +95,24 @@ class VtrActorSheet extends _ParentSheet {
     });
 
     // Roll Ásatrú
-    html.find(".skill-asatru .skill-name").on("click", async (ev) => {
+    html.find(".skill-asatru .skill-name").on("click", async () => {
       const abilityMod = this.actor.system.abilities.wis?.mod ?? 0;
       const prof = this.actor.system.attributes.prof ?? 2;
-      const proficient = this.actor.flags?.["vers-le-ragnarok"]?.asatruProf ?? 0;
+      const proficient = this.actor.getFlag("vers-le-ragnarok", "asatruProf") ?? 0;
       const bonus = Math.floor(prof * proficient) + abilityMod;
       const roll = await new Roll(`1d20 + ${bonus}`).evaluate();
       roll.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: `Ásatrú (SAG)`
+        flavor: "Ásatrú (SAG)"
       });
     });
 
-    // Toggle maîtrise Ásatrú (clic sur la case)
-    if (this.isEditable) {
-      html.find(".skill-asatru .proficiency-toggle").on("click", async (ev) => {
-        const current = this.actor.flags?.["vers-le-ragnarok"]?.asatruProf ?? 0;
-        const next = current >= 2 ? 0 : current === 0 ? 1 : 2;
-        await this.actor.setFlag("vers-le-ragnarok", "asatruProf", next);
-      });
-    }
+    // Toggle maîtrise Ásatrú
+    html.find(".skill-asatru .proficiency-toggle").on("click", async () => {
+      const current = this.actor.getFlag("vers-le-ragnarok", "asatruProf") ?? 0;
+      const next = current >= 2 ? 0 : current === 0 ? 1 : 2;
+      await this.actor.setFlag("vers-le-ragnarok", "asatruProf", next);
+    });
   }
 }
 
