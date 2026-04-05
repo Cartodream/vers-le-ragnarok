@@ -18,6 +18,29 @@
       "path": "lang/fr.json"
     }
   ],
+  "packs": [
+    {
+      "name": "classes",
+      "label": "Vers le Ragnarök — Classes",
+      "path": "packs/classes",
+      "type": "Item",
+      "system": "dnd5e"
+    },
+    {
+      "name": "subclasses",
+      "label": "Vers le Ragnarök — Sous-classes",
+      "path": "packs/subclasses",
+      "type": "Item",
+      "system": "dnd5e"
+    },
+    {
+      "name": "backgrounds",
+      "label": "Vers le Ragnarök — Historiques",
+      "path": "packs/backgrounds",
+      "type": "Item",
+      "system": "dnd5e"
+    }
+  ],
   "flags": {},
   "url": "https://github.com/Cartodream/vers-le-ragnarok",
   "manifest": "https://raw.githubusercontent.com/Cartodream/vers-le-ragnarok/main/module.json",
