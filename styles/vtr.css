@@ -1,5 +1,9 @@
 /* ===== VERS LE RAGNARÖK — PERSONNALISATION ===== */
 
-.vtr-sheet .ability-scores {
+.dnd5e2.sheet.actor.character .sheet-header {
+  min-height: 170px;
+}
+
+.dnd5e2.sheet.actor.character .ability-scores {
   border: none;
 }

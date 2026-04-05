@@ -113,6 +113,8 @@ class VtrActorSheet extends CharacterActorSheet {
   }
 }
 
+globalThis.VtrActorSheet = VtrActorSheet;
+
 Hooks.once("init", () => {
   foundry.documents.collections.Actors.registerSheet("dnd5e", VtrActorSheet, {
     types: ["character"],
