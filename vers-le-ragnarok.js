@@ -5,7 +5,7 @@ class VtrActorSheet extends CharacterActorSheet {
   static DEFAULT_OPTIONS = foundry.utils.mergeObject(
     CharacterActorSheet.DEFAULT_OPTIONS,
     {
-      classes: ["dnd5e", "sheet", "actor", "character", "vertical-tabs"],
+      classes: ["dnd5e", "sheet", "actor", "character", "vertical-tabs", "vtr-sheet"],
       actions: {
         rollAsatru: VtrActorSheet.#rollAsatru,
         toggleAsatruProf: VtrActorSheet.#toggleAsatruProf
