@@ -116,6 +116,9 @@ class VtrActorSheet extends CharacterActorSheet {
 globalThis.VtrActorSheet = VtrActorSheet;
 
 Hooks.once("init", () => {
+  delete CONFIG.DND5E.skills.dec;
+  CONFIG.DND5E.skills.ins.label = "Ásatrú";
+
   foundry.documents.collections.Actors.registerSheet("dnd5e", VtrActorSheet, {
     types: ["character"],
     makeDefault: false,
