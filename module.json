@@ -86,7 +86,7 @@
     {
       "name": "items",
       "label": "Objets (VTR)",
-      "path": "packs/items/items",
+      "path": "packs/items",
       "type": "Item",
       "system": "dnd5e",
       "folder": "Objets et sorts"
@@ -102,7 +102,7 @@
     {
       "name": "spells",
       "label": "Sorts (VTR)",
-      "path": "packs/spells/spells",
+      "path": "packs/spells",
       "type": "Item",
       "system": "dnd5e",
       "folder": "Objets et sorts"
