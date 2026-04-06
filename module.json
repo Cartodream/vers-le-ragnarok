@@ -38,7 +38,7 @@
     {
       "name": "backgrounds",
       "label": "Historiques (VTR)",
-      "path": "packs/backgrounds",
+      "path": "packs/backgrounds/backgrounds",
       "type": "Item",
       "system": "dnd5e",
       "folder": "Aptitudes de personnage"
@@ -86,7 +86,7 @@
     {
       "name": "items",
       "label": "Objets (VTR)",
-      "path": "packs/items",
+      "path": "packs/items/items",
       "type": "Item",
       "system": "dnd5e",
       "folder": "Objets et sorts"
@@ -102,7 +102,7 @@
     {
       "name": "spells",
       "label": "Sorts (VTR)",
-      "path": "packs/spells",
+      "path": "packs/spells/spells",
       "type": "Item",
       "system": "dnd5e",
       "folder": "Objets et sorts"

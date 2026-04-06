@@ -1,0 +1,66 @@
+_id: J21PEE9iutosRMCI
+name: Bondhi
+type: background
+img: systems/dnd5e/icons/svg/items/background.svg
+system:
+  description:
+    value: >-
+      <p>Ce terme désigne un homme propriétaire d'un petit lopin de terre
+      agricole. Dans les territoires septentrionaux rudes et hostiles, posséder
+      un lopin de terre arable peut engendrer quelques complications. À
+      Miðgarðr, un homme libre fait partie d'un organisme social complexe,
+      régulé par des lois précises.</p><p>La terre et les animaux constituent la
+      richesse de ces hommes, libres devant la loi et suffisamment riches pour
+      s'équiper en armes. Ainsi, ces derniers temps, une catégorie d'hommes
+      libres sachant manier les armes est apparue dans la société nordique. La
+      possession de terres permet aux bondhar d'acheter l'équipement nécessaire
+      pour partir faire la guerre. Plus la terre vaut cher et meilleurs sont les
+      équipements et les armes de ces paysans combattants.</p><p>Être un bondhi
+      impose une grande responsabilité sociale, ainsi qu'un style de vie rude
+      marqué par le dur labeur, mais c'est également une source de grande
+      fierté. Un bondhi défendra avec acharnement son indépendance et son
+      autonomie à la fois dans le þing et par la force des armes.</p><p>Quand
+      ils partent à la guerre, les bondhar se rassemblent en fridhr, des groupes
+      dont les membres appartiennent à la même communauté ou þing et avec des
+      liens de parenté.</p><p>Ces formations de combattants sont soudées et très
+      pugnaces, même si elles ont tendance à agir de manière impulsive lorsque
+      leur famille est en danger.</p><hr /><p>Maîtrise de compétence : Dressage,
+      Perception</p><p>Outils : outils d'artisan</p><p>Equipement : habits
+      courants, un ensemble d'outils d'artisan de votre choix, un bracelet orné
+      d'une rune, une arme courante, un récipient en terre cuite, un sac de cuir
+      contenant 15 po.</p>
+    chat: ''
+  identifier: bondhi
+  source:
+    revision: 1
+    rules: '2014'
+  advancement:
+    - type: Trait
+      _id: uSyNSnLJo30i4c9i
+      configuration:
+        allowReplacements: false
+        choices: []
+        grants:
+          - skills:ani
+          - skills:prc
+        mode: default
+      level: 0
+      title: ''
+      hint: ''
+      value: {}
+  startingEquipment: []
+  wealth: ''
+effects: []
+folder: null
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13.348'
+  systemId: dnd5e
+  systemVersion: 5.1.10
+  createdTime: 1775484575779
+  modifiedTime: 1775484575779
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!J21PEE9iutosRMCI'
