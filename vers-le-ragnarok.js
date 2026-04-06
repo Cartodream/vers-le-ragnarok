@@ -115,6 +115,40 @@ class VtrActorSheet extends CharacterActorSheet {
 
 globalThis.VtrActorSheet = VtrActorSheet;
 
+class VtrRuneButton extends Application {
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      id: "vtr-rune-button",
+      template: null,
+      popOut: false
+    });
+  }
+
+  render(force, options) {
+    if ( document.getElementById("vtr-rune-button") ) return this;
+    const btn = document.createElement("div");
+    btn.id = "vtr-rune-button";
+    btn.innerHTML = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="50,5 95,95 5,95" fill="#2c1a0e" stroke="#c88600" stroke-width="4"/>
+      <text x="50" y="72" text-anchor="middle" font-size="38" fill="#c8860088">ᚱ</text>
+    </svg>`;
+    btn.title = "Lancer les runes";
+    btn.addEventListener("click", () => this._rollRune());
+    document.body.appendChild(btn);
+    return this;
+  }
+
+  async _rollRune() {
+    const roll = await new Roll("1d24").evaluate();
+    roll.toMessage({ flavor: "🎲 Lancer de rune" });
+  }
+}
+
+Hooks.once("ready", () => {
+  if ( game.user.isGM || game.user.character ) {
+    new VtrRuneButton().render(true);
+  }
+});
 Hooks.once("init", () => {
   delete CONFIG.DND5E.skills.dec;
   CONFIG.DND5E.skills.ins.label = "Ásatrú";

@@ -7,3 +7,20 @@
 .dnd5e2.sheet.actor.character .ability-scores {
   border: none;
 }
+
+#vtr-rune-button {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  z-index: 9999;
+  filter: drop-shadow(0 0 6px #c88600);
+  transition: filter 0.2s, transform 0.2s;
+}
+
+#vtr-rune-button:hover {
+  filter: drop-shadow(0 0 12px #c88600);
+  transform: scale(1.1);
+}
