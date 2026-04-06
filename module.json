@@ -38,7 +38,7 @@
     {
       "name": "backgrounds",
       "label": "Historiques (VTR)",
-      "path": "packs/backgrounds/backgrounds",
+      "path": "packs/backgrounds",
       "type": "Item",
       "system": "dnd5e",
       "folder": "Aptitudes de personnage"

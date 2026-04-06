@@ -1,0 +1,15 @@
+name: Niveau 9
+type: Item
+_id: vtrSpellsNiveau0009
+folder: null
+sorting: a
+sort: 1000000
+flags: {}
+_stats:
+  systemId: dnd5e
+  systemVersion: 5.1.10
+  coreVersion: '13.348'
+  createdTime: 1775484575779
+  modifiedTime: 1775484575779
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!folders!vtrSpellsNiveau0009'
