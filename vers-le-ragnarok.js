@@ -12,6 +12,30 @@ const VTR_RUNES = [
     endroit: { titre: "Force, courage, initiative.", effet_aett: "Rien dans les Neuf mondes ne peut vous arrêter, vous vivrez pour voir un nouveau jour se lever.", effet_rune: "Vous appliquez votre bonus de maîtrise à vos jets d'initiative." },
     envers:  { titre: "Férocité, agression, addiction.", effet_aett: "La force n'est qu'apparente lorsqu'on la compare à la faiblesse, vous pressentez l'oppression et les abus de pouvoir.", effet_rune: "Vous êtes avantagé lors des tests de Charisme (Intimidation) et des jets d'attaque contre des créatures dont la valeur de Force est inférieure à la vôtre. Vous êtes également désavantagé contre les créatures dont la valeur de Force est supérieure à la vôtre." },
     aett: "Freyja", don: "L'instinct de survie", presides: "Ymir"
+  },
+  {
+    id: 3, nom: "Thurisaz", symbole: "ᚦ",
+    endroit: { titre: "Résistance, protection, bonnes décisions.", effet_aett: "Quand éclate le plus violent des orages, il faut s'abriter derrière des murs solides et concevoir de meilleures stratégies.", effet_rune: "Chaque fois que vous subissez des dégâts d'une source unique, vous les réduisez de 1. Si le total des dégâts est réduit à 0 ou moins, vous n'en subissez aucun." },
+    envers:  { titre: "Fragilité, confusion, événement imprévu.", effet_aett: "Vous vous sentez abattu, incertain, sans défense, à la merci des événements, toutes vos certitudes s'effondrent comme un mur sans fondations.", effet_rune: "Chaque fois que vous subissez des dégâts d'une source unique, vous les augmentez de 1." },
+    aett: "Freyja", don: "La rencontre", presides: "Thor"
+  },
+  {
+    id: 4, nom: "Ansuz", symbole: "ᚨ",
+    endroit: { titre: "Guérison, sagesse, inspiration.", effet_aett: "Vous pressentez que de nouvelles idées surgiront au cours de la journée, que des solutions seront trouvées et que chaque nœud sera dénoué.", effet_rune: "Vous gagnez immédiatement de l'inspiration." },
+    envers:  { titre: "Tromperie, trahison, égoïsme.", effet_aett: "Vous ne pouvez faire confiance à personne, la trahison et la tromperie vous attendent à chaque tournant.", effet_rune: "Vous ne pouvez pas bénéficier de l'action aider ni être avantagé grâce à d'autres créatures." },
+    aett: "Freyja", don: "L'appel", presides: "Odhinn"
+  },
+  {
+    id: 5, nom: "Raido", symbole: "ᚱ",
+    endroit: { titre: "Voyage, recherche, nouveaux défis.", effet_aett: "Aujourd'hui, le monde s'étend devant vous, prêt à être exploré, allez simplement où vos pas vous mènent.", effet_rune: "Vous ignorez les terrains difficiles." },
+    envers:  { titre: "Ralentissement, renonciation, échec.", effet_aett: "Vous pressentez que la route sera ardue, pleine d'obstacles, de dangers et d'incertitudes. Cela en vaut-il vraiment la peine ? Vous songez à abandonner devant le premier véritable problème.", effet_rune: "Vous ne pouvez pas faire l'action se précipiter ni bénéficier de bonus à votre vitesse de déplacement de base." },
+    aett: "Freyja", don: "Le voyage du héros", presides: "les Valkyrjur"
+  },
+  {
+    id: 6, nom: "Kenaz", symbole: "ᚲ",
+    endroit: { titre: "Renaissance, compréhension, révélation.", effet_aett: "Tout se passera bien aujourd'hui, tous les problèmes deviendront une opportunité et toutes les épreuves, une chance de s'améliorer.", effet_rune: "Chaque fois que vous ratez un jet de sauvegarde, un jet d'attaque ou un test de caractéristique, vous serez avantagé lors du prochain jet du même type." },
+    envers:  { titre: "Ignorance, superficialité, arrogance.", effet_aett: "Aujourd'hui, vous vous sentez bien trop sûr de vous. À cause de cela, vous serez confronté à de nombreux problèmes normalement évitables.", effet_rune: "Chaque fois que vous réussissez un jet de sauvegarde, un jet d'attaque ou un test de caractéristique, vous serez désavantagé lors du prochain jet du même type." },
+    aett: "Freyja", don: "Le feu de la transformation", presides: "Surtr"
   }
 ];
 
@@ -182,7 +206,7 @@ class VtrRuneButton extends Application {
     const img = `modules/vers-le-ragnarok/runes/${rune.id}.png`;
     const content = `
       <div style="text-align:center;">
-        <img src="${img}" style="width:80px;height:80px;border:none;"/>
+        <img src="${img}" style="width:80px;height:80px;border:none;display:block;margin:0 auto;"/>
         <h2 style="margin:4px 0;">${rune.id}. ${rune.nom.toUpperCase()} &mdash; ${sensLabel}</h2>
         <p><em>${rune.don}</em>, présidé par <strong>${rune.presides}</strong>.</p>
         <hr/>
