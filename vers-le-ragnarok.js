@@ -1,5 +1,21 @@
 const { CharacterActorSheet } = dnd5e.applications.actor;
 
+const VTR_RUNES = [
+  {
+    id: 1, nom: "Fehu", symbole: "ᚠ",
+    endroit: { titre: "Fortune, succès et bien-être mérités.", effet_aett: "Vous sentez un brusque regain d'optimisme, tout semble se dérouler de la bonne manière.", effet_rune: "Vous gagnez un bonus de +1 aux tests de caractéristique et un 20 naturel est toujours considéré comme un succès." },
+    envers:  { titre: "Mal, jalousie, envie.", effet_aett: "Tout semble se dérouler de la bonne manière pour tout le monde, sauf pour vous. Vous êtes jaloux de leurs réussites et anticipez vos propres échecs.", effet_rune: "Vous subissez un malus de -1 aux tests de caractéristique et un 1 naturel est toujours considéré comme un échec." },
+    aett: "Freyja", don: "Le don de la vie", presides: "Auðhumla, Freyr et Freyja"
+  },
+  {
+    id: 2, nom: "Ūruz", symbole: "ᚢ",
+    endroit: { titre: "Force, courage, initiative.", effet_aett: "Rien dans les Neuf mondes ne peut vous arrêter, vous vivrez pour voir un nouveau jour se lever.", effet_rune: "Vous appliquez votre bonus de maîtrise à vos jets d'initiative." },
+    envers:  { titre: "Férocité, agression, addiction.", effet_aett: "La force n'est qu'apparente lorsqu'on la compare à la faiblesse, vous pressentez l'oppression et les abus de pouvoir.", effet_rune: "Vous êtes avantagé lors des tests de Charisme (Intimidation) et des jets d'attaque contre des créatures dont la valeur de Force est inférieure à la vôtre. Vous êtes également désavantagé contre les créatures dont la valeur de Force est supérieure à la vôtre." },
+    aett: "Freyja", don: "L'instinct de survie", presides: "Ymir"
+  }
+];
+
+
 class VtrActorSheet extends CharacterActorSheet {
 
   static DEFAULT_OPTIONS = foundry.utils.mergeObject(
@@ -133,14 +149,49 @@ class VtrRuneButton extends Application {
       <text x="50" y="72" text-anchor="middle" font-size="38" fill="#c8860088">ᚱ</text>
     </svg>`;
     btn.title = "Lancer les runes";
-    btn.addEventListener("click", () => this._rollRune());
     document.body.appendChild(btn);
+
+    let dragging = false, startX, startY, origX, origY;
+    btn.addEventListener("mousedown", e => {
+      dragging = false;
+      startX = e.clientX; startY = e.clientY;
+      origX = btn.offsetLeft; origY = btn.offsetTop;
+      const onMove = e => {
+        if ( Math.abs(e.clientX - startX) > 3 || Math.abs(e.clientY - startY) > 3 ) dragging = true;
+        btn.style.left = origX + (e.clientX - startX) + "px";
+        btn.style.top  = origY + (e.clientY - startY) + "px";
+        btn.style.right = "auto"; btn.style.bottom = "auto";
+      };
+      const onUp = () => {
+        document.removeEventListener("mousemove", onMove);
+        document.removeEventListener("mouseup", onUp);
+        if ( !dragging ) this._rollRune();
+      };
+      document.addEventListener("mousemove", onMove);
+      document.addEventListener("mouseup", onUp);
+    });
+
     return this;
   }
 
   async _rollRune() {
-    const roll = await new Roll("1d24").evaluate();
-    roll.toMessage({ flavor: "🎲 Lancer de rune" });
+    const rune = VTR_RUNES[Math.floor(Math.random() * VTR_RUNES.length)];
+    const sens = Math.random() < 0.5 ? "endroit" : "envers";
+    const data = rune[sens];
+    const sensLabel = sens === "endroit" ? "🔺 À l'endroit" : "🔻 À l'envers";
+    const img = `modules/vers-le-ragnarok/runes/${rune.id}.png`;
+    const content = `
+      <div style="text-align:center;">
+        <img src="${img}" style="width:80px;height:80px;border:none;"/>
+        <h2 style="margin:4px 0;">${rune.id}. ${rune.nom.toUpperCase()} &mdash; ${sensLabel}</h2>
+        <p><em>${rune.don}</em>, présidé par <strong>${rune.presides}</strong>.</p>
+        <hr/>
+        <p><strong>${data.titre}</strong></p>
+        <p><strong>Effet de l'ætt de ${rune.aett}</strong><br/>${data.effet_aett}</p>
+        <p><strong>Effet de la rune ${rune.nom}</strong><br/>${data.effet_rune}</p>
+      </div>
+    `;
+    ChatMessage.create({ content, speaker: ChatMessage.getSpeaker() });
   }
 }
 
