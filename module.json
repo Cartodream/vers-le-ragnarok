@@ -21,25 +21,97 @@
   "packs": [
     {
       "name": "classes",
-      "label": "Vers le Ragnarök — Classes",
+      "label": "Classes (VTR)",
       "path": "packs/classes",
       "type": "Item",
-      "system": "dnd5e"
+      "system": "dnd5e",
+      "folder": "Aptitudes de personnage"
     },
     {
       "name": "subclasses",
-      "label": "Vers le Ragnarök — Sous-classes",
+      "label": "Sous-classes (VTR)",
       "path": "packs/subclasses",
       "type": "Item",
-      "system": "dnd5e"
+      "system": "dnd5e",
+      "folder": "Aptitudes de personnage"
     },
     {
       "name": "backgrounds",
-      "label": "Vers le Ragnarök — Historiques",
+      "label": "Historiques (VTR)",
       "path": "packs/backgrounds",
       "type": "Item",
-      "system": "dnd5e"
+      "system": "dnd5e",
+      "folder": "Aptitudes de personnage"
+    },
+    {
+      "name": "classfeatures",
+      "label": "Aptitudes de classes & sous-classes (VTR)",
+      "path": "packs/classfeatures",
+      "type": "Item",
+      "system": "dnd5e",
+      "folder": "Aptitudes de personnage"
+    },
+    {
+      "name": "races",
+      "label": "Races (VTR)",
+      "path": "packs/races",
+      "type": "Item",
+      "system": "dnd5e",
+      "folder": "Aptitudes de personnage"
+    },
+    {
+      "name": "heroes",
+      "label": "Prétirés (VTR)",
+      "path": "packs/heroes",
+      "type": "Actor",
+      "system": "dnd5e",
+      "folder": "Monstres"
+    },
+    {
+      "name": "rules",
+      "label": "Règles (VTR)",
+      "path": "packs/rules",
+      "type": "JournalEntry",
+      "system": "dnd5e",
+      "folder": "Monstres"
+    },
+    {
+      "name": "tables",
+      "label": "Tables (VTR)",
+      "path": "packs/tables",
+      "type": "RollTable",
+      "system": "dnd5e",
+      "folder": "Monstres"
+    },
+    {
+      "name": "items",
+      "label": "Objets (VTR)",
+      "path": "packs/items",
+      "type": "Item",
+      "system": "dnd5e",
+      "folder": "Objets et sorts"
+    },
+    {
+      "name": "tradegoods",
+      "label": "Marchandises (VTR)",
+      "path": "packs/tradegoods",
+      "type": "Item",
+      "system": "dnd5e",
+      "folder": "Objets et sorts"
+    },
+    {
+      "name": "spells",
+      "label": "Sorts (VTR)",
+      "path": "packs/spells",
+      "type": "Item",
+      "system": "dnd5e",
+      "folder": "Objets et sorts"
     }
+  ],
+  "packFolders": [
+    { "name": "Aptitudes de personnage", "sorting": "a" },
+    { "name": "Monstres", "sorting": "a" },
+    { "name": "Objets et sorts", "sorting": "a" }
   ],
   "flags": {},
   "url": "https://github.com/Cartodream/vers-le-ragnarok",
